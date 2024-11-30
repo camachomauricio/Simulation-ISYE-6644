@@ -242,21 +242,21 @@ v = 2   # Salvage value per unit (if unsold)
 h = 1   # Holding cost per unit
 
 a = 0  # Minimum order quantity
-b = 200  # Maximum order quantity
+b = 130  # Maximum order quantity
 order_quantities = np.arange(a, b)
 
 # Define general parameters for the simulation
 iterations = 10000  # Number of iterations for the Monte Carlo simulation
-distribution = 'normal'  # Specify the distribution to use
+distribution = 'triangular'  # Specify the distribution to use
 
 # Define specific parameters for each distribution
 distribution_params = {
-    'normal': {'mu': 100, 'sigma': 50, 'a': a, 'b': b},
+    'normal': {'mu': 50, 'sigma': 50, 'a': a, 'b': b},
     'uniform': {'a': a, 'b': b},
     'exponential': {'lam': 1/100, 'a': a, 'b': b},
     'poisson': {'lam': 100, 'a': a, 'b': b},
     'lognormal': {'mu': 4.5, 'sigma': 0.75, 'a': a, 'b': b},
-    'triangular': {'c': 100, 'a': a, 'b': b},
+    'triangular': {'c': 65, 'a': a, 'b': b},
     'beta': {'alpha': 2, 'beta': 5, 'a': a, 'b': b},
     'weibull': {'lam': 100, 'k': 1.5, 'a': a, 'b': b},
     'geometric': {'p': 0.3, 'a': a, 'b': b},
@@ -266,7 +266,7 @@ distribution_params = {
 }
 
 # Initialize the LCG with a seed
-lcg = LCG(seed=1234)
+lcg = LCG(seed=12345)
 
 # Simulate demand based on the specified distribution and parameters
 demands = simulate_demand(lcg, iterations, distribution, **distribution_params[distribution])
